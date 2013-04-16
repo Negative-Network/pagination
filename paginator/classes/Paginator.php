@@ -867,7 +867,7 @@ class Paginator implements Countable, IteratorAggregate {
 		}
 		else
 		{
-			$first = $previous = $pages_in_range[1] = $next = $last = '';
+			$first = $previous = $pages_in_range[1] = $next = $last = $items_per_page = '';
 		}
 
 		$view = View::factory('paginator/pagination');
@@ -876,6 +876,11 @@ class Paginator implements Countable, IteratorAggregate {
 		$view->pages_in_range = $pages_in_range;
 		$view->next = $next;
 		$view->last = $last;
+                
+                $item_per_page = $this->get_item_count_per_page();
+                if($item_per_page != $this->get_total_item_count())
+                    $view->items_per_page = $item_per_page;
+                else $view->items_per_page = 'all';
 
 		return $view->render();
 	}
