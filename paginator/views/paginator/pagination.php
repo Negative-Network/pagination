@@ -11,14 +11,14 @@ $last_string = '&nbsp;>>';
         margin: 2px;
         padding: 0.1em 0.2em;
     }
-    .pagination .left {
+    .pagination div.first {
         margin-right: 40px;
     }
     -->
 </style>
-<span class="pagination">
+<div class="pagination right">
     <?php
-    echo '<div class="left">';
+    echo '<div class="right">';
     if ($first) {
         echo '<a href="' . $first . '" rel="first">' . $first_string . '</a>';
     }
@@ -36,7 +36,7 @@ $last_string = '&nbsp;>>';
     }
     echo '</div>';
     if ($items_per_page) {
-        echo '<div class="right">';
+        echo '<div class="right first">';
         if ($items_per_page == 10)
             echo $items_per_page; else
             echo '<a href="?amount=10" rel="last">10</a>';
@@ -55,4 +55,4 @@ $last_string = '&nbsp;>>';
         echo '</div>';
     }
     ?>
-</span>
+</div>
