@@ -50,7 +50,7 @@ $last_string = '&nbsp;>>';
             echo $items_per_page; else
             echo '<a href="?amount=100" rel="last">100</a>';
         if ($items_per_page == 'all')
-            echo __('All'); else
+            echo '&infin;'; else
             echo '<a href="?amount=0" rel="last">&infin;</a>';
         echo '</div>';
     }
