@@ -92,11 +92,6 @@ class Paginator implements Countable, IteratorAggregate {
 	protected $_current_item_count = null;
 
 	/**
-	* count result objects in adapter
-	*/
-    protected $_current_adapter_item_count = null;
-
-	/**
 	 * Current page items
 	 *
 	 * @var Traversable
@@ -294,7 +289,7 @@ class Paginator implements Countable, IteratorAggregate {
 	 */
 	public function get_total_item_count()
 	{
-		return count($this->get_adapter());
+		return $this->get_adapter()->count();
 	}
 
 	/**
