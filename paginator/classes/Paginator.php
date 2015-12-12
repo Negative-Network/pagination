@@ -363,19 +363,16 @@ class Paginator implements Countable, IteratorAggregate {
 	{
 		if ($this->_current_item_count === null)
 		{
-            $countPerPage = $this->get_item_count_per_page();
-            $pageNumber = $this->get_current_page_number();
-            $allCount = $this->get_adapter()->count();
-            $countPages = $this->count();
-            if($countPages == $pageNumber){
-                $countOnCurrentPage = $allCount % $countPerPage;
-            }else{
-                $countOnCurrentPage = $countPerPage;
-            }
-            $this->_current_item_count = $countOnCurrentPage;
-//			old code. befor optimize. remove it after testing:
-//			$check_current_item_count = $this->get_item_count($this->get_current_items());
-
+			$countPerPage = $this->get_item_count_per_page();
+			$pageNumber = $this->get_current_page_number();
+			$allCount = $this->get_adapter()->count();
+			$countPages = $this->count();
+			if($countPages == $pageNumber){
+				$countOnCurrentPage = $allCount % $countPerPage;
+			}else{
+				$countOnCurrentPage = $countPerPage;
+			}
+			$this->_current_item_count = $countOnCurrentPage;
 		}
 
 		return $this->_current_item_count;
@@ -793,14 +790,11 @@ class Paginator implements Countable, IteratorAggregate {
 		$pages->last_page_in_range = max($pages->pages_in_range);
 
 		// Item numbers
-//		if ($this->get_current_items() !== null)
-//		{
-			$pages->current_item_count = $this->get_current_item_count();
-			$pages->item_count_per_page = $this->get_item_count_per_page();
-			$pages->total_item_count = $this->get_total_item_count();
-			$pages->first_item_number = (($current_page_number - 1) * $this->get_item_count_per_page()) + 1;
-			$pages->last_item_number = $pages->first_item_number + $pages->current_item_count - 1;
-//		}
+		$pages->current_item_count = $this->get_current_item_count();
+		$pages->item_count_per_page = $this->get_item_count_per_page();
+		$pages->total_item_count = $this->get_total_item_count();
+		$pages->first_item_number = (($current_page_number - 1) * $this->get_item_count_per_page()) + 1;
+		$pages->last_item_number = $pages->first_item_number + $pages->current_item_count - 1;
 
 		return $pages;
 	}
@@ -889,10 +883,12 @@ class Paginator implements Countable, IteratorAggregate {
 		$view->next = $next;
 		$view->last = $last;
 
-                $item_per_page = $this->get_item_count_per_page();
-                if($item_per_page != $this->get_total_item_count())
-                    $view->items_per_page = $item_per_page;
-                else $view->items_per_page = 'all';
+		$item_per_page = $this->get_item_count_per_page();
+		if ($item_per_page != $this->get_total_item_count()) {
+			$view->items_per_page = $item_per_page;
+		} else {
+			$view->items_per_page = 'all';
+		}
 
 		return $view->render();
 	}
